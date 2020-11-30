@@ -28,6 +28,12 @@ class MaterialIntroSequence private constructor(private val activity: Activity) 
         found[0]
       }
     }
+
+    fun removeSequenceInstance(activity: Activity) {
+      val found = sequences.filter { it.activity == activity }
+      if(found.isNotEmpty())
+        sequences.remove(found[0])
+    }
   }
 
   private var mivs = ArrayList<MaterialIntroView>()
