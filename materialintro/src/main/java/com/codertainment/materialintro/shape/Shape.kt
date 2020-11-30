@@ -9,12 +9,12 @@ import com.codertainment.materialintro.utils.Constants
 abstract class Shape @JvmOverloads constructor(
   protected var target: Target,
   protected var focus: Focus = Focus.MINIMUM,
-  focusGravity: FocusGravity = FocusGravity.CENTER,
+  private val focusGravity: FocusGravity = FocusGravity.CENTER,
   protected var padding: Int = Constants.DEFAULT_TARGET_PADDING
 ) {
 
   abstract fun draw(canvas: Canvas, eraser: Paint, padding: Int)
-  protected val focusPoint = when {
+  protected val focusPoint get() = when {
     focusGravity === FocusGravity.LEFT -> {
       val xLeft = target.rect.left + (target.point.x - target.rect.left) / 2
       Point(xLeft, target.point.y)
@@ -29,6 +29,7 @@ abstract class Shape @JvmOverloads constructor(
   abstract fun reCalculateAll()
   abstract val point: Point
   abstract val height: Int
+
   /**
    * Determines if a click is on the shape
    * @param x x-axis location of click
